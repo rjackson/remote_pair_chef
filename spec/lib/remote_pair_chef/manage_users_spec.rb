@@ -15,7 +15,7 @@ describe ManageUsers do
     cudb = ManageUsers.new(users: [user], path: tmp_dir)
     cudb.create_users
 
-    expect(File.read("#{tmp_dir}/#{ManageUsers::PREFIX}_#{user}.json")).to eq(File.read("spec/fixtures/#{user}.json").chomp)
+    expect(File.read("#{tmp_dir}/#{ManageUsers::DATA_BAG_PREFIX}_#{user}.json")).to eq(File.read("spec/fixtures/#{user}.json").chomp)
   end
 
   after(:all) do

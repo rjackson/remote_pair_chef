@@ -8,7 +8,7 @@ puts  Dir.glob("lib/remote_pair_chef/*.rb") {|f| require_relative f }
 # Remove user databags at the beginning of next session.
 # This ensures that users are never persisted to the next
 # pairing session.
-CLOBBER.add(File.expand_path("./data_bags/users/#{ManageUsers::PREFIX}*.json"))
+CLOBBER.add(File.expand_path("./data_bags/users/#{ManageUsers::DATA_BAG_PREFIX}*.json"))
 
 desc "Setup users from ENV"
 task :setup_github_users do
