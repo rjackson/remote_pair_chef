@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 require 'uri'
 
-class CreateUserDataBags
+class ManageUsers
   PREFIX = "remote_pair_chef_auto"
 
   def initialize(opts)

@@ -8,14 +8,14 @@ puts  Dir.glob("lib/remote_pair_chef/*.rb") {|f| require_relative f }
 # Remove user databags at the beginning of next session.
 # This ensures that users are never persisted to the next
 # pairing session.
-CLOBBER.add(File.expand_path("./data_bags/users/#{CreateUserDataBags::PREFIX}*.json"))
+CLOBBER.add(File.expand_path("./data_bags/users/#{ManageUsers::PREFIX}*.json"))
 
 desc "Setup users from ENV"
 task :setup_github_users do
   users = [ENV['RPC_HOST'], ENV['RPC_PAIR']]
   puts "Creating users #{users.join(',')}" if users.compact.length > 0
 
-  CreateUserDataBags.new(users: users).create_users
+  ManageUsers.new(users: users).create_users
 end
 
 desc "Setup dotenv through a prompt"

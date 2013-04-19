@@ -1,8 +1,8 @@
 require 'spec_helper'
-require_relative '../../../lib/remote_pair_chef/create_user_data_bags'
+require_relative '../../../lib/remote_pair_chef/manage_users'
 
 require 'tmpdir'
-describe CreateUserDataBags do
+describe ManageUsers do
   let(:user)    { "rondale-sc" }
   let(:tmp_dir) { Dir.mktmpdir }
 
@@ -12,10 +12,10 @@ describe CreateUserDataBags do
   end
 
   it "creates a valid user given a github user_id" do
-    cudb = CreateUserDataBags.new(users: [user], path: tmp_dir)
+    cudb = ManageUsers.new(users: [user], path: tmp_dir)
     cudb.create_users
 
-    expect(File.read("#{tmp_dir}/#{CreateUserDataBags::PREFIX}_#{user}.json")).to eq(File.read("spec/fixtures/#{user}.json").chomp)
+    expect(File.read("#{tmp_dir}/#{ManageUsers::PREFIX}_#{user}.json")).to eq(File.read("spec/fixtures/#{user}.json").chomp)
   end
 
   after(:all) do
