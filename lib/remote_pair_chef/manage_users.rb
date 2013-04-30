@@ -11,11 +11,8 @@ class ManageUsers
     opts ||= {}
     env    = opts.fetch(:env) { ENV }
 
-    self.path  = opts.fetch(:path)  { "data_bags/users" }
-    self.users = opts.fetch(:users) { [] }
-    self.users += env.values_at('RPC_HOST','RPC_PAIR')
-
-    self.users.compact!
+    self.path   = opts.fetch(:path)  { "data_bags/users" }
+    self.users  = opts.fetch(:users) { env.values_at('RPC_HOST','RPC_PAIR').compact }
   end
 
   def create_users
