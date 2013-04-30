@@ -3,17 +3,33 @@ require 'json'
 require 'uri'
 
 class ManageUsers
+  attr_accessor :path, :users
+
   DATA_BAG_PREFIX = "remote_pair_chef_auto"
 
-  def initialize(opts)
-    @users = opts.delete(:users)
-    @path = opts.fetch(:path) { "data_bags/users" }
+  def initialize(opts = nil)
+    opts ||= {}
+    env    = opts.fetch(:env) { ENV }
+
+    self.path  = opts.fetch(:path)  { "data_bags/users" }
+    self.users = opts.fetch(:users) { [] }
+    self.users += env.values_at('RPC_HOST','RPC_PAIR')
+
+    self.users.compact!
   end
 
   def create_users
     @users.compact.each do |u|
       create_user_data_bag(u)
     end
+  end
+
+  def add(*users)
+    self.users.concat Array(users)
+  end
+
+  def remove(*users)
+    self.users.delete_if{|u| users.include?(u) }
   end
 
   private
