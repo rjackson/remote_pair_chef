@@ -4,6 +4,7 @@ run_list(
   "recipe[vim]",
   "recipe[git::default]",
   "recipe[sqlite::default]",
+  "recipe[mosh::default]",
   "recipe[remote_pair_chef::default]"
 )
 
